@@ -1,22 +1,35 @@
 package com.example.practicekotlin
 
-import android.graphics.Paint.Align
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,11 +45,7 @@ class MainActivity : ComponentActivity() {
                    modifier = Modifier.fillMaxSize(),
                    color = MaterialTheme.colorScheme.background
                ) {
-                    BirthdayGreeting(
-                        name = "Android",
-                        from = "Hemanth",
-                        modifier = Modifier.padding(8.dp)
-                    )
+                   BusinessCard()
                 }
             }
         }
@@ -44,31 +53,121 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BirthdayGreeting(name: String, from: String, modifier: Modifier = Modifier) {
+fun BusinessCard(modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.android_logo)
     Column(
-        verticalArrangement = Arrangement.Center,
         modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(Color(210, 232, 212)),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Hello $name!",
-            fontSize = 100.sp,
-            lineHeight = 166.sp,
-            textAlign =  TextAlign.Center
-        )
-        Text(
-            text = "from $from!",
-            fontSize = 36.sp,
-            modifier = Modifier
-                .padding(16.dp)
-                .align(alignment = Alignment.End)
-
-        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(Color(41, 70, 86))
+                    .padding(12.dp)
+                    .size(120.dp)
+            ) {
+                Image(
+                    painter = image,
+                    contentDescription = "android Logo",
+                )
+            }
+            Text(
+                text = "Thogaruchesti Hemanth",
+                style = TextStyle(
+                    fontSize = 22.sp,
+                    letterSpacing = 0.8.sp
+                ),
+                modifier = modifier
+                    .padding(vertical = 8.dp)
+            )
+            Text(
+                text = "Android Developer Extraordinaire",
+                style = TextStyle(
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 14.sp,
+                    color = Color(44, 133, 90),
+                )
+            )
+        }
     }
+    Box(
+        contentAlignment = Alignment.BottomCenter,
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
 
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalAlignment = Alignment.Start,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 80.dp, vertical = 60.dp)
+
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    Icons.Default.Phone,
+                    contentDescription = "Mobile Icon",
+                    tint = Color(44, 133, 90)
+                )
+                Text(
+                    text = "+11 (123) 444 555 666",
+                    style = TextStyle(
+                        fontSize = 14.sp
+                    )
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    Icons.Default.Share,
+                    contentDescription = "Mobile Icon",
+                    tint = Color(44, 133, 90)
+                )
+                Text(
+                    text = "@AndroidDev",
+                    style = TextStyle(
+                        fontSize = 14.sp
+                    )
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    Icons.Default.Email,
+                    contentDescription = "Mobile Icon",
+                    tint = Color(44, 133, 90)
+                )
+                Text(
+                    text = "jen.doe@android.com",
+                    style = TextStyle(
+                        fontSize = 14.sp
+                    )
+                )
+            }
+        }
+    }
 }
 
-@Preview(showBackground = true)
+
+@Preview(
+    showSystemUi = true
+)
 @Composable
-fun GreetingPreview() {
-    BirthdayGreeting(name = "SAI", from = "Hemanth")
+fun BusinessCardPreview(){
+    BusinessCard()
 }
